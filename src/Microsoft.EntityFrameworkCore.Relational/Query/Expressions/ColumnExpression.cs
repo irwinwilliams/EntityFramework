@@ -92,6 +92,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Expressions
         public override Type Type { get; }
 
         /// <summary>
+        ///     Indicates that this column expression should be treated as nullable even if the property itself says otherwise.
+        ///     It is used to track nullability of columns coming from optional navigations.
+        /// </summary>
+        public virtual bool ForceNullability { get; set; }
+
+        /// <summary>
         ///     Dispatches to the specific visit method for this node type.
         /// </summary>
         protected override Expression Accept(ExpressionVisitor visitor)

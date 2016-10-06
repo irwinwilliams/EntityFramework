@@ -96,7 +96,7 @@ namespace Microsoft.EntityFrameworkCore.Query.ExpressionVisitors.Internal
                                    ?? node.TryGetColumnExpression();
 
             if ((columnExpression != null)
-                && columnExpression.Property.IsNullable)
+                && (columnExpression.Property.IsNullable || columnExpression.ForceNullability))
             {
                 AddToResult(new IsNullExpression(node));
 

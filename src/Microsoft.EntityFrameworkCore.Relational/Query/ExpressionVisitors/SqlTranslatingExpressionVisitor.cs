@@ -1020,6 +1020,14 @@ namespace Microsoft.EntityFrameworkCore.Query.ExpressionVisitors
             {
                 var newAccessOperation = Visit(nullConditionalExpression.AccessOperation);
 
+                var columnExpression = ((newAccessOperation as AliasExpression)?.Expression as ColumnExpression)
+                    ?? (newAccessOperation as ColumnExpression);
+
+                if (columnExpression != null)
+                {
+                    columnExpression.ForceNullability = true;
+                }
+
                 if (newAccessOperation != null
                     && newAccessOperation.Type != nullConditionalExpression.Type)
                 {
